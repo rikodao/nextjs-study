@@ -24,9 +24,10 @@ export default function Index({ people }) {
   )
 }
 const getsp = async (i) => {
-  let people = await fetcher('http://localhost:3000/api/people')
-  // console.log(people.slice(6));
-  people = people.slice(i)
+  // let people = await fetcher('http://localhost:3000/api/people')
+  // // console.log(people.slice(6));
+  // people = people.slice(i) 
+  const  people = [{}]
   return { props: { people } }
 }
 
@@ -34,7 +35,7 @@ const getsp = async (i) => {
 //     return await getsp(8)
 //   }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   return await getsp(4)
 }
 
