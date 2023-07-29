@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import useSWR from 'swr'
 import Person from '../../components/Person'
-
+let  people = []
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Index({ people }) {
@@ -23,11 +23,26 @@ export default function Index({ people }) {
   </>
   )
 }
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 const getsp = async (i) => {
   // let people = await fetcher('http://localhost:3000/api/people')
-  // // console.log(people.slice(6));
+
+  people.push(
+    {
+      "id": String(getRandomInt(1000)),
+      "name": String(getRandomInt(1000)),
+      "height": "165",
+      "mass": "75",
+      "hair_color": "brown",
+      "skin_color": "light",
+      "eye_color": "blue",
+      "gender": "female"
+    })
+  // console.log(people.slice(6));
   // people = people.slice(i) 
-  const  people = [{}]
+  // const  people = [{}]
   return { props: { people } }
 }
 
@@ -36,7 +51,7 @@ const getsp = async (i) => {
 //   }
 
 export const getStaticProps = async () => {
-  return await getsp(4)
+  return { ...await getsp(6), revalidate: 2, }
 }
 
 
